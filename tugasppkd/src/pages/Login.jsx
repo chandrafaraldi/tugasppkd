@@ -2,14 +2,21 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Lock, User, Moon, Star } from 'lucide-react';
+import { useEffect } from 'react';
 
 export const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { login } = useAuth();
+  const { user, login } = useAuth();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -33,7 +40,7 @@ export const Login = () => {
       {/* Background Image with Overlay */}
       <div
         className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat transition-transform duration-1000 scale-105"
-        style={{ backgroundImage: 'url("/assets/login_bg.png")' }}
+        style={{ backgroundImage: `url("${import.meta.env.BASE_URL}assets/login_bg.png")` }}
       >
         <div className="absolute inset-0 bg-emerald-950/70 backdrop-blur-[2px]"></div>
       </div>
@@ -41,7 +48,7 @@ export const Login = () => {
       <div className="max-w-md w-full mx-4 relative z-10 transition-all duration-700">
         <div className="bg-emerald-900/90 backdrop-blur-md px-6 py-8 text-center relative z-10 border-b border-white/10">
           <div className="w-20 h-20 mx-auto bg-white rounded-full flex items-center justify-center mb-4 shadow-xl p-2 border-4 border-amber-400/30">
-            <img src="/logo.jpeg" alt="PPKD Logo" className="w-full h-full object-contain rounded-full" />
+            <img src={`${import.meta.env.BASE_URL}logo.jpeg`} alt="PPKD Logo" className="w-full h-full object-contain rounded-full" />
           </div>
           <h2 className="text-3xl font-extrabold text-white tracking-widest">PPKD HOTEL</h2>
           <div className="inline-flex items-center justify-center gap-1.5 mt-3 bg-amber-400/20 px-4 py-1.5 rounded-full text-amber-200 text-xs font-bold uppercase tracking-wider border border-amber-400/20">

@@ -24,7 +24,7 @@ export const Header = () => {
             </button>
           </div>
           <div className="flex items-center gap-2">
-            <img src="/logo.jpeg" alt="Logo" className="w-8 h-8 object-contain rounded-md border border-slate-200" />
+            <img src={`${import.meta.env.BASE_URL}logo.jpeg`} alt="Logo" className="w-8 h-8 object-contain rounded-md border border-slate-200" />
             <h1 className="text-sm font-bold text-emerald-900 tracking-tight hidden sm:block">PPKD HOTEL</h1>
           </div>
         </div>

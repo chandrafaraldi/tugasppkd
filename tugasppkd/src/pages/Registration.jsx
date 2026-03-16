@@ -172,7 +172,7 @@ function Registration() {
           {/* HEADER */}
           <div className="flex flex-col items-center mb-8">
             <div className="w-24 h-24 mb-2">
-              <img src="/logo.jpeg" alt="PPKD Logo" className="w-full h-full object-contain rounded-lg" />
+              <img src={`${import.meta.env.BASE_URL}logo.jpeg`} alt="PPKD Logo" className="w-full h-full object-contain rounded-lg" />
             </div>
             <h1 className="text-xl font-bold tracking-widest uppercase mt-2">PPKD HOTEL</h1>
           </div>
@@ -284,7 +284,7 @@ function Registration() {
 
         <div className="text-center mb-8">
           <div className="w-20 h-20 mx-auto flex items-center justify-center mb-3">
-            <img src="/logo.jpeg" alt="PPKD Logo" className="w-full h-full object-contain rounded-lg" />
+            <img src={`${import.meta.env.BASE_URL}logo.jpeg`} alt="PPKD Logo" className="w-full h-full object-contain rounded-lg" />
           </div>
           <h1 className="text-3xl font-serif text-teal-900 tracking-wider mb-1">PPKD HOTEL</h1>
           <h2 className="text-lg font-light text-slate-600">Formulir Pendaftaran / Registration</h2>

@@ -23,7 +23,7 @@ export const Sidebar = () => {
 
       <div className="p-6 flex items-center gap-3 border-b border-white/5 relative z-10">
         <div className="w-12 h-12 rounded-xl border border-amber-400/30 flex items-center justify-center bg-white/10 backdrop-blur-sm shadow-inner p-1 shrink-0">
-          <img src="/logo.jpeg" alt="Logo" className="w-full h-full object-contain rounded-lg" />
+          <img src={`${import.meta.env.BASE_URL}logo.jpeg`} alt="Logo" className="w-full h-full object-contain rounded-lg" />
         </div>
         <div className="overflow-hidden">
           <h1 className="text-lg font-black text-white tracking-widest truncate">PPKD HOTEL</h1>

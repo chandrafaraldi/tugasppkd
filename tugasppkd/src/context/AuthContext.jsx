@@ -35,8 +35,10 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchGuests();
-  }, []);
+    if (user) {
+      fetchGuests();
+    }
+  }, [user]);
 
   // In a real app, you'd check localStorage or an API here
   useEffect(() => {
@@ -47,6 +49,14 @@ export const AuthProvider = ({ children }) => {
       } catch (e) {
         console.error("Failed to parse user from localStorage", e);
       }
+    } else {
+      // AUTO-LOGIN: Jika belum ada user, langsung gunakan akun Vincensius
+      const defaultUser = { 
+        username: 'vincensius', 
+        role: 'Receptionist', 
+        name: 'Vincensius Chandra DaludaCako Faraldi' 
+      };
+      setUser(defaultUser);
     }
     setLoading(false);
   }, []);
