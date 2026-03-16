@@ -39,13 +39,13 @@ export const GuestList = () => {
     const searchMatch = 
       guest.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       guest.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      guest.roomNo.includes(searchTerm);
+      guest.room_no.includes(searchTerm);
       
     // Status match
     const statusMatch = filterStatus === 'All' || guest.status === filterStatus;
     
     // Room type match
-    const roomMatch = filterRoom === 'All' || guest.roomType === filterRoom;
+    const roomMatch = filterRoom === 'All' || guest.room_type === filterRoom;
     
     return searchMatch && statusMatch && roomMatch;
   });
@@ -164,14 +164,14 @@ export const GuestList = () => {
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2 text-slate-900 font-medium">
                         <BedDouble className="w-4 h-4 text-slate-400" />
-                        Room {guest.roomNo}
+                        Room {guest.room_no}
                       </div>
-                      <div className="text-xs text-slate-500 mt-0.5">{guest.roomType}</div>
+                      <div className="text-xs text-slate-500 mt-0.5">{guest.room_type}</div>
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2 text-slate-600">
                         <Calendar className="w-4 h-4 text-slate-400" />
-                        <span>{guest.checkIn} <span className="text-slate-400 text-xs mx-1">to</span> {guest.checkOut}</span>
+                        <span>{guest.check_in} <span className="text-slate-400 text-xs mx-1">to</span> {guest.check_out}</span>
                       </div>
                     </td>
                     <td className="px-6 py-4">
@@ -303,8 +303,8 @@ export const GuestList = () => {
                   <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Room No</label>
                   <input 
                     type="text" 
-                    value={editingGuest.roomNo}
-                    onChange={(e) => setEditingGuest({...editingGuest, roomNo: e.target.value})}
+                    value={editingGuest.room_no}
+                    onChange={(e) => setEditingGuest({...editingGuest, room_no: e.target.value})}
                     className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
                   />
                 </div>
@@ -325,14 +325,14 @@ export const GuestList = () => {
               <div>
                 <label className="block text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Room Type</label>
                 <select 
-                  value={editingGuest.roomType}
+                  value={editingGuest.room_type}
                   onChange={(e) => {
                     const newType = e.target.value;
-                    const nights = calculateNights(editingGuest.checkIn, editingGuest.checkOut);
+                    const nights = calculateNights(editingGuest.check_in, editingGuest.check_out);
                     const rate = ROOM_RATES[newType] || 0;
                     // Assuming 1 room for simplicity in the edit modal, as noOfRoom isn't tracked in guest object currently
                     const newTotal = nights * rate;
-                    setEditingGuest({...editingGuest, roomType: newType, total: newTotal});
+                    setEditingGuest({...editingGuest, room_type: newType, total: newTotal});
                   }}
                   className="w-full px-4 py-2 border border-slate-200 rounded-lg focus:ring-2 focus:ring-emerald-500 outline-none"
                 >
@@ -408,8 +408,8 @@ export const GuestList = () => {
               <div className="grid grid-cols-2 gap-y-6">
                 <div>
                   <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Room Information</p>
-                  <p className="font-semibold text-slate-700">Room {viewingGuest.roomNo}</p>
-                  <p className="text-sm text-slate-500">{viewingGuest.roomType}</p>
+                  <p className="font-semibold text-slate-700">Room {viewingGuest.room_no}</p>
+                  <p className="text-sm text-slate-500">{viewingGuest.room_type}</p>
                 </div>
                 <div>
                   <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Total Billing</p>
@@ -419,14 +419,14 @@ export const GuestList = () => {
                   <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Check In Date</p>
                   <p className="font-medium text-slate-700 flex items-center gap-2">
                     <Calendar className="w-4 h-4 text-slate-400" />
-                    {viewingGuest.checkIn}
+                    {viewingGuest.check_in}
                   </p>
                 </div>
                 <div>
                   <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Check Out Date</p>
                   <p className="font-medium text-slate-700 flex items-center gap-2">
                     <Calendar className="w-4 h-4 text-slate-400" />
-                    {viewingGuest.checkOut}
+                    {viewingGuest.check_out}
                   </p>
                 </div>
               </div>

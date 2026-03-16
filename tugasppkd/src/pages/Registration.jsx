@@ -86,10 +86,10 @@ function Registration() {
       id: bookingNo,
       name: formData.name,
       phone: formData.phone,
-      roomNo: formData.roomNo || 'TBA',
-      roomType: formData.roomType,
-      checkIn: formData.arrivalDate,
-      checkOut: formData.departureDate,
+      room_no: formData.roomNo || 'TBA',
+      room_type: formData.roomType,
+      check_in: formData.arrivalDate,
+      check_out: formData.departureDate,
       status: 'Checked In',
       total: totalAmount
     };

@@ -95,12 +95,17 @@ export const AuthProvider = ({ children }) => {
 
     // 2. BACKSTAGE ONLINE: Coba simpan ke Supabase di belakang layar
     try {
-      const { error } = await supabase
+      console.log('Inserting guest to Supabase:', newGuest);
+      const { data, error } = await supabase
         .from('guests')
-        .insert([newGuest]);
+        .insert([newGuest])
+        .select();
 
       if (error) {
-        console.warn('Peringatan: Gagal sinkronisasi data baru ke Supabase secara online. Data hanya tersimpan lokal saat ini.', error.message);
+        console.error('Supabase Insert Error:', error);
+        alert(`Gagal menyimpan ke database (Supabase): ${error.message}. Pastikan struktur tabel sesuai.`);
+      } else {
+        console.log('Successfully synced to Supabase:', data);
       }
     } catch (error) {
       console.error('Network Error saat menyimpan ke Supabase:', error.message);
