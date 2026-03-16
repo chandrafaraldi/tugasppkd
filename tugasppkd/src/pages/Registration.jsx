@@ -17,24 +17,24 @@ function Registration() {
     noOfRoom: 1,
     roomType: 'Standard Room',
     receptionist: '',
-    
+
     name: '',
     profession: '',
     company: '',
     arrivalTime: '',
     arrivalDate: '',
-    
+
     nationality: 'Indonesia',
     idNumber: '',
     birthDate: '',
-    
+
     address: '',
     phone: '',
     departureDate: '',
-    
+
     email: '',
     memberNo: '',
-    
+
     safetyDepositBox: '',
     issuedBy: '',
     issueDate: ''
@@ -47,7 +47,7 @@ function Registration() {
     const { name, value } = e.target;
     setFormData(prev => {
       const newState = { ...prev, [name]: value };
-      
+
       // Auto assign room type based on room number
       if (name === 'roomNo' && value) {
         const num = parseInt(value);
@@ -58,7 +58,7 @@ function Registration() {
           else newState.roomType = 'Standard Room';
         }
       }
-      
+
       return newState;
     });
   };
@@ -78,10 +78,10 @@ function Registration() {
     const roomRate = ROOM_RATES[formData.roomType] || 0;
     const rooms = parseInt(formData.noOfRoom) || 1;
     const totalAmount = nights * roomRate * rooms;
-    
+
     // OFFLINE FEEL: ID generator lokal
     const bookingNo = 'PPKD-' + Math.floor(Math.random() * 900000 + 100000);
-    
+
     const newGuest = {
       id: bookingNo,
       name: formData.name,
@@ -93,10 +93,10 @@ function Registration() {
       status: 'Checked In',
       total: totalAmount
     };
-    
+
     // OFFLINE FEEL: Pasti sukses karena AuthContext langsung melempar { success: true }
     await addGuest(newGuest);
-    
+
     setBookingDetails({
       ...formData,
       nights,
@@ -117,23 +117,23 @@ function Registration() {
     // GAMBAR 2: RESERVATION CONFIRMATION OUTPUT
     return (
       <div className="min-h-screen bg-slate-100 print:bg-white py-12 print:py-0 px-4 sm:px-6 lg:px-8 print:px-0 font-serif text-slate-800 flex flex-col items-center">
-        
+
         {/* ACTION BUTTONS (Hidden in Print) */}
         <div className="w-full max-w-[800px] flex justify-end gap-3 mb-6 print:hidden">
-          <Link 
+          <Link
             to="/"
             className="inline-flex items-center px-4 py-2 bg-emerald-100 border border-emerald-200 rounded-md shadow-sm text-sm font-medium text-emerald-700 hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500"
           >
             Kembali ke Dashboard
           </Link>
-          <button 
+          <button
             onClick={() => window.print()}
             className="inline-flex items-center px-4 py-2 bg-white border border-slate-300 rounded-md shadow-sm text-sm font-medium text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
           >
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
             Print Confirmation
           </button>
-          <button 
+          <button
             onClick={() => {
               setIsSubmitted(false);
               setFormData({
@@ -168,7 +168,7 @@ function Registration() {
 
         {/* PRINTABLE A4 AREA */}
         <div className="w-full max-w-[800px] bg-white print:shadow-none shadow-xl min-h-[1100px] p-10 md:p-14 border border-slate-200 print:border-none relative">
-          
+
           {/* HEADER */}
           <div className="flex flex-col items-center mb-8">
             <div className="w-24 h-24 mb-2">
@@ -210,7 +210,7 @@ function Registration() {
             <div className="flex"><span className="w-40">Room/Unit Type</span><span>: {bookingDetails.roomType} ({bookingDetails.rooms} Room)</span></div>
             <div className="flex"><span className="w-40">Person Pax</span><span>: {bookingDetails.noOfPerson} Pax</span></div>
             <div className="flex"><span className="w-40">Room Rate Net (per Night)</span><span>: {formatCurrency(bookingDetails.roomRate)}</span></div>
-            
+
             <div className="absolute right-0 bottom-0 bg-slate-100 p-4 border border-slate-300 rounded-sm">
               <span className="block text-xs uppercase tracking-wider text-slate-500 mb-1">Total Estimasi</span>
               <span className="block text-xl font-bold text-slate-800">{formatCurrency(bookingDetails.totalAmount)}</span>
@@ -220,7 +220,7 @@ function Registration() {
           <div className="text-sm space-y-4 mb-8 text-justify">
             <p>Please guarantee this booking with credit card number with clear copy of the card both sides and card holder signature in the column provided the copy of credit card both sides should be faxed to hotel fax number.</p>
             <p>Please settle your outstanding to or account:</p>
-            
+
             <div className="ml-4 space-y-1">
               <div className="font-semibold">Bank Transfer</div>
               <div className="flex"><span className="w-40">Mandiri Account</span><span>: 123-00-4567890-1</span></div>
@@ -281,7 +281,7 @@ function Registration() {
   return (
     <div className="min-h-screen bg-slate-50 py-12 px-4 sm:px-6 lg:px-8 font-sans text-slate-800 flex justify-center">
       <div className="max-w-4xl w-full">
-        
+
         <div className="text-center mb-8">
           <div className="w-20 h-20 mx-auto flex items-center justify-center mb-3">
             <img src="/logo.jpeg" alt="PPKD Logo" className="w-full h-full object-contain rounded-lg" />
@@ -292,7 +292,7 @@ function Registration() {
 
         <div className="bg-white shadow-xl shadow-slate-200/50 rounded-lg overflow-hidden border border-slate-200">
           <form onSubmit={handleSubmit}>
-            
+
             {/* -- SECTION 1: TOP INFOS -- */}
             <div className="flex flex-col md:flex-row border-b border-slate-200 text-sm">
               <div className="flex-1 p-4 border-b md:border-b-0 md:border-r border-slate-200 bg-slate-50/50">
@@ -334,14 +334,14 @@ function Registration() {
 
             {/* -- SECTION 2: GUEST DETAILS -- */}
             <div className="grid grid-cols-1 md:grid-cols-12 border-b border-slate-200 text-sm">
-              
+
               {/* Left Column blocks */}
               <div className="md:col-span-8 border-r border-slate-200">
                 <div className="p-4 border-b border-slate-200">
                   <label className="block text-xs text-slate-500 mb-1">Nama / Name <span className="text-red-500">*</span></label>
                   <input required type="text" name="name" value={formData.name} onChange={handleInputChange} className="w-full bg-transparent outline-none font-medium" placeholder="Full Name" />
                 </div>
-                
+
                 <div className="p-4 border-b border-slate-200 bg-slate-50/50">
                   <label className="block text-xs text-slate-500 mb-1">Pekerjaan / Profession</label>
                   <input type="text" name="profession" value={formData.profession} onChange={handleInputChange} className="w-full bg-transparent outline-none" />
@@ -393,15 +393,15 @@ function Registration() {
               {/* Right Column blocks (Dates) */}
               <div className="md:col-span-4 bg-slate-50/20">
                 <div className="p-4 border-b border-slate-200 h-[105px]">
-                  <label className="block text-xs text-slate-500 mb-1 group-focus-within:text-teal-600">Waktu Kedatangan<br/>Arrival Time</label>
+                  <label className="block text-xs text-slate-500 mb-1 group-focus-within:text-teal-600">Waktu Kedatangan<br />Arrival Time</label>
                   <input type="time" name="arrivalTime" value={formData.arrivalTime} onChange={handleInputChange} className="w-full bg-transparent outline-none mt-2" />
                 </div>
                 <div className="p-4 border-b border-slate-200 h-[105px]">
-                  <label className="block text-xs text-slate-500 mb-1">Tanggal Kedatangan<br/>Arrival Date <span className="text-red-500">*</span></label>
+                  <label className="block text-xs text-slate-500 mb-1">Tanggal Kedatangan<br />Arrival Date <span className="text-red-500">*</span></label>
                   <input required type="date" name="arrivalDate" value={formData.arrivalDate} onChange={handleInputChange} className="w-full bg-transparent outline-none mt-2" />
                 </div>
                 <div className="p-4 border-b border-slate-200 h-[105px]">
-                  <label className="block text-xs text-slate-500 mb-1 text-red-700 font-medium">Tgl Keberangkatan<br/>Departure Date <span className="text-red-500">*</span></label>
+                  <label className="block text-xs text-slate-500 mb-1 text-red-700 font-medium">Tgl Keberangkatan<br />Departure Date <span className="text-red-500">*</span></label>
                   <input required type="date" name="departureDate" value={formData.departureDate} onChange={handleInputChange} className="w-full bg-transparent outline-none mt-2" />
                 </div>
                 <div className="p-4 h-[200px]">
@@ -414,15 +414,15 @@ function Registration() {
             {/* -- SECTION 3: BOTTOM DEPOSIT -- */}
             <div className="flex flex-col md:flex-row border-b border-slate-200 text-sm">
               <div className="flex-[2] p-4 border-b md:border-b-0 md:border-r border-slate-200 bg-slate-100/50">
-                <label className="block text-xs text-slate-500 mb-1">Nomor Kotak Deposit<br/>Safety Deposit Box Number</label>
+                <label className="block text-xs text-slate-500 mb-1">Nomor Kotak Deposit<br />Safety Deposit Box Number</label>
                 <input type="text" name="safetyDepositBox" value={formData.safetyDepositBox} onChange={handleInputChange} className="w-full bg-transparent outline-none" />
               </div>
               <div className="flex-1 p-4 border-b md:border-b-0 md:border-r border-slate-200 bg-slate-100/50">
-                <label className="block text-xs text-slate-500 mb-1">Dikeluarkan oleh<br/>Issued</label>
+                <label className="block text-xs text-slate-500 mb-1">Dikeluarkan oleh<br />Issued</label>
                 <input type="text" name="issuedBy" value={formData.issuedBy} onChange={handleInputChange} className="w-full bg-transparent outline-none" />
               </div>
               <div className="flex-1 p-4 bg-slate-100/50">
-                <label className="block text-xs text-slate-500 mb-1">Tanggal<br/>Date</label>
+                <label className="block text-xs text-slate-500 mb-1">Tanggal<br />Date</label>
                 <input type="date" name="issueDate" value={formData.issueDate} onChange={handleInputChange} className="w-full bg-transparent outline-none" />
               </div>
             </div>
@@ -469,19 +469,19 @@ function Registration() {
                 <p className="text-xs text-slate-500 uppercase tracking-wide mb-1">Total Estimasi Biaya</p>
                 <p className="text-2xl font-bold text-teal-700">
                   {formatCurrency(
-                    calculateNights(formData.arrivalDate, formData.departureDate) 
-                    * (ROOM_RATES[formData.roomType] || 0) 
+                    calculateNights(formData.arrivalDate, formData.departureDate)
+                    * (ROOM_RATES[formData.roomType] || 0)
                     * (parseInt(formData.noOfRoom) || 1)
                   )}
                 </p>
                 <p className="text-[10px] text-slate-400 mt-1">({formData.noOfRoom} Kamar × {calculateNights(formData.arrivalDate, formData.departureDate)} Malam)</p>
               </div>
-              
+
               <button type="submit" className="px-10 py-4 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-xl shadow-md transition-colors duration-200 focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 w-full md:w-auto text-lg">
                 Proses Registrasi & Cetak
               </button>
             </div>
-            
+
           </form>
         </div>
       </div>
