@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { LayoutDashboard, FileText, Settings, Users, Moon, BedDouble, Star } from 'lucide-react';
+import { LayoutDashboard, FileText, Settings, Users, Moon, BedDouble, X } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
-export const Sidebar = () => {
+export const Sidebar = ({ onClose }) => {
   const { user } = useAuth();
   const menuItems = [
     { name: 'Dashboard', icon: LayoutDashboard, path: '/' },
@@ -21,14 +21,22 @@ export const Sidebar = () => {
         </div>
       </div>
 
-      <div className="p-6 flex items-center gap-3 border-b border-white/5 relative z-10">
-        <div className="w-12 h-12 rounded-xl border border-amber-400/30 flex items-center justify-center bg-white/10 backdrop-blur-sm shadow-inner p-1 shrink-0">
-          <img src={`${import.meta.env.BASE_URL}logo.jpeg`} alt="Logo" className="w-full h-full object-contain rounded-lg" />
+      <div className="p-6 flex items-center justify-between border-b border-white/5 relative z-10">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 rounded-xl border border-amber-400/30 flex items-center justify-center bg-white/10 backdrop-blur-sm shadow-inner p-1 shrink-0">
+            <img src={`${import.meta.env.BASE_URL}logo.jpeg`} alt="Logo" className="w-full h-full object-contain rounded-lg" />
+          </div>
+          <div className="overflow-hidden">
+            <h1 className="text-lg font-black text-white tracking-widest truncate">PPKD HOTEL</h1>
+            <p className="text-[10px] text-emerald-400 font-bold uppercase tracking-tighter">Edisi Ramadhan</p>
+          </div>
         </div>
-        <div className="overflow-hidden">
-          <h1 className="text-lg font-black text-white tracking-widest truncate">PPKD HOTEL</h1>
-          <p className="text-[10px] text-emerald-400 font-bold uppercase tracking-tighter">Edisi Ramadhan</p>
-        </div>
+        <button 
+          onClick={onClose}
+          className="md:hidden text-white/60 hover:text-white p-2"
+        >
+          <X className="w-6 h-6" />
+        </button>
       </div>
 
       <nav className="flex-1 py-4 px-3 space-y-1">
@@ -36,6 +44,7 @@ export const Sidebar = () => {
           <NavLink
             key={item.name}
             to={item.path}
+            onClick={onClose}
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${isActive
                 ? 'bg-emerald-600 text-white shadow-md shadow-emerald-900/50'

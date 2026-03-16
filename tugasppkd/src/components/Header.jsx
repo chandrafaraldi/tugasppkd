@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { LogOut, Bell, Menu } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-export const Header = () => {
+export const Header = ({ onMenuClick }) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -19,7 +19,10 @@ export const Header = () => {
         {/* Mobile menu button and Logo */}
         <div className="flex items-center gap-4">
           <div className="md:hidden flex items-center">
-            <button className="text-slate-500 hover:text-slate-700">
+            <button 
+              onClick={onMenuClick}
+              className="text-slate-500 hover:text-slate-700 p-2 -ml-2 rounded-lg hover:bg-slate-100 transition-colors"
+            >
               <Menu className="w-6 h-6" />
             </button>
           </div>
