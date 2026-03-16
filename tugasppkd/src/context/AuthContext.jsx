@@ -40,16 +40,8 @@ export const AuthProvider = ({ children }) => {
     }
   }, [user]);
 
-  // In a real app, you'd check localStorage or an API here
+  // No longer loading user from localStorage to force manual login
   useEffect(() => {
-    const savedUser = localStorage.getItem('user');
-    if (savedUser) {
-      try {
-        setUser(JSON.parse(savedUser));
-      } catch (e) {
-        console.error("Failed to parse user from localStorage", e);
-      }
-    }
     setLoading(false);
   }, []);
 
@@ -69,7 +61,6 @@ export const AuthProvider = ({ children }) => {
       // Remove password from stored data for security
       const { password, ...userData } = foundUser;
       setUser(userData);
-      localStorage.setItem('user', JSON.stringify(userData));
       return true;
     }
 
@@ -78,7 +69,6 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('user');
   };
 
   const addGuest = async (newGuest) => {
