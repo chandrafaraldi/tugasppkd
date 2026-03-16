@@ -24,8 +24,8 @@ export const Dashboard = () => {
   // Use live data from context for Recent Registrations
   const recentRegistrations = safeGuests.slice(0, 5).map(g => ({
     name: g?.name || 'Unknown',
-    type: g?.roomType || '-',
-    date: g?.checkIn || g?.date || '-', 
+    type: g?.room_type || '-',
+    date: g?.check_in || g?.date || '-', 
     status: g?.status || 'Unknown'
   }));
 

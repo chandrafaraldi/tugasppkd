@@ -23,8 +23,8 @@ export const RoomAvailability = () => {
   const allRooms = floors.flatMap(floor => 
     Array.from({ length: roomsPerFloor }, (_, i) => {
       const roomNo = `${floor}${String(i + 1).padStart(2, '0')}`;
-      const occupant = guests.find(g => g.roomNo === roomNo && g.status === 'Checked In');
-      const pendingRoom = guests.find(g => g.roomNo === roomNo && g.status === 'Pending Clean');
+      const occupant = guests.find(g => g.room_no === roomNo && g.status === 'Checked In');
+      const pendingRoom = guests.find(g => g.room_no === roomNo && g.status === 'Pending Clean');
       
       return {
         roomNo,
